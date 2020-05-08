@@ -4,21 +4,21 @@ import { Link } from "react-router-dom";
 
 const Logo = styled.div`
   font-size: 1.5rem;
-  color: #bb86fc;
+  color: #41b883;
 `;
 const Bar = styled.div`
   display: grid;
   grid-template-columns: 180px auto 100px 100px;
   padding: 0 16px;
   background: #1f1b24;
-  color: #bb86fc;
+  color: #41b883;
   line-height: 72px;
 `;
 
 const ControlLink = styled(Link)`
   cursor: pointer;
+  color: #41b883;
   text-decoration: none;
-  color: #bb86fc;
 
   &:focus,
   &:hover,
