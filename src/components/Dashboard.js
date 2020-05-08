@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import Loader from "react-loader-spinner";
+import { connect } from "react-redux";
+import { fetchCoins, searchCoins } from "../actions";
 import CoinGrid from "./CoinGrid";
-import cryptoApi from "../api/crypto";
+import SearchBar from "./SearchBar";
 
 const Board = styled.div`
   display: flex;
@@ -11,37 +13,16 @@ const Board = styled.div`
   height: 80vh;
 `;
 
-const Input = styled.input`
-  padding: 1rem;
-  background: #1f1b24;
-  color: #f9ffee;
-  font-size: 1.2rem;
-  margin: 20px 0;
-  border-radius: 10px;
-  border: none;
-`;
 class DashBoard extends React.Component {
-  state = { coinsList: [], searchField: "" };
-
   componentDidMount() {
-    cryptoApi
-      .get("/data/top/mktcapfull?limit=100&tsym=USD")
-      .then((response) => {
-        this.setState({
-          coinsList: response.data.Data,
-        });
-        console.log(this.state.coinsList[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.props.fetchCoins();
   }
 
   onSeachChange = (e) => {
-    this.setState({ searchField: e.target.value });
+    this.props.searchCoins({ searchTerm: e.target.value });
   };
   render() {
-    if (!this.state.coinsList.length) {
+    if (!this.props.coins.length) {
       return (
         <Board>
           <Loader
@@ -56,16 +37,21 @@ class DashBoard extends React.Component {
     }
     return (
       <div>
-        <Input
-          type="text"
-          placeholder="Search Coin"
-          value={this.state.searchField}
-          onChange={this.onSeachChange}
+        <SearchBar
+          value={this.props.searchTerm}
+          onSearch={this.onSeachChange}
         />
-        <CoinGrid coins={this.state.coinsList} term={this.state.searchField} />
+        <CoinGrid coins={this.props.coins} term={this.props.searchTerm} />
       </div>
     );
   }
 }
 
-export default DashBoard;
+const mapStateToProps = (state) => {
+  return {
+    coins: state.coins,
+    searchTerm: state.searchTerm,
+  };
+};
+
+export default connect(mapStateToProps, { fetchCoins, searchCoins })(DashBoard);

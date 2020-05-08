@@ -37,6 +37,7 @@ class CoinGrid extends React.Component {
 
   renderCoinsList() {
     const BASE_URL = "https://www.cryptocompare.com";
+    console.log(this.props.coins[0]);
     return this.props.coins
       .filter((coin) => {
         return coin.CoinInfo.FullName.toLowerCase().includes(this.props.term);

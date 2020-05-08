@@ -4,7 +4,7 @@ import AppLayout from "./AppLayout";
 import NavBar from "./NavBar";
 import DashBoard from "./Dashboard";
 import News from "./News";
-import history from "./history";
+import history from "../history";
 
 const App = () => {
   return (
