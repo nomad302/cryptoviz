@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { searchCoins } from "../actions";
 
 const Input = styled.input`
   padding: 1rem;
@@ -16,10 +18,14 @@ const SearchBar = (props) => {
     <Input
       type="text"
       placeholder="Search"
-      value={props.value}
-      onChange={props.onSearch}
+      value={props.searchValue}
+      onChange={(e) => props.searchCoins(e.target.value)}
     />
   );
 };
 
-export default SearchBar;
+const mapStateToProps = (state) => {
+  return { searchValue: state.searchTerm.value };
+};
+
+export default connect(mapStateToProps, { searchCoins })(SearchBar);

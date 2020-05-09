@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
 const Grid = styled.div`
@@ -37,10 +38,11 @@ class CoinGrid extends React.Component {
 
   renderCoinsList() {
     const BASE_URL = "https://www.cryptocompare.com";
-    console.log(this.props.coins[0]);
     return this.props.coins
       .filter((coin) => {
-        return coin.CoinInfo.FullName.toLowerCase().includes(this.props.term);
+        return coin.CoinInfo.FullName.toLowerCase().includes(
+          this.props.searchTerm.value
+        );
       })
       .map((coin, index) => {
         return (
@@ -69,4 +71,8 @@ class CoinGrid extends React.Component {
   }
 }
 
-export default CoinGrid;
+const mapStateToProps = (state) => {
+  return { coins: state.coins, searchTerm: state.searchTerm };
+};
+
+export default connect(mapStateToProps, null)(CoinGrid);

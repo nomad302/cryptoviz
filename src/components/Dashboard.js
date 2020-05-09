@@ -18,9 +18,6 @@ class DashBoard extends React.Component {
     this.props.fetchCoins();
   }
 
-  onSeachChange = (e) => {
-    this.props.searchCoins({ searchTerm: e.target.value });
-  };
   render() {
     if (!this.props.coins.length) {
       return (
@@ -38,10 +35,10 @@ class DashBoard extends React.Component {
     return (
       <div>
         <SearchBar
-          value={this.props.searchTerm}
+          value={this.props.searchTerm.value}
           onSearch={this.onSeachChange}
         />
-        <CoinGrid coins={this.props.coins} term={this.props.searchTerm} />
+        <CoinGrid />
       </div>
     );
   }
