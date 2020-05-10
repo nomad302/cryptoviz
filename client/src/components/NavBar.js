@@ -29,9 +29,9 @@ const ControlLink = styled(Link)`
   }
 `;
 
-function ControlButton({ to, name }) {
+const ControlButton = ({ to, name }) => {
   return <ControlLink to={to}>{name}</ControlLink>;
-}
+};
 
 const NavBar = () => {
   return (

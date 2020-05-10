@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node api/index.js",
+    "server": "nodemon api/index.js",
+    "client": "npm run start --prefix client",
+    "worker": "node worker/index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -19,8 +23,12 @@
   "homepage": "https://github.com/nomad302/cryptoviz#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "concurrently": "^5.2.0",
     "cron": "^1.8.2",
     "express": "^4.17.1",
     "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
   }
 }

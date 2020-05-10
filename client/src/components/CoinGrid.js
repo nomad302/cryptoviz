@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Grid = styled.div`
   display: grid;
@@ -8,13 +9,21 @@ const Grid = styled.div`
   grid-gap: 15px;
   color: #efbb35;
   margin-top: 20px;
+  & :hover {
+    cursor: pointer;
+    box-shadow: 0 0 3px 3px #41b883;
+  }
 `;
 
-const Tile = styled.div`
+const Tile = styled(Link)`
   text-align: center;
   background: #1f1b24;
   color: #efbb35;
   padding: 15px;
+  text-decoration: none;
+  & :hover {
+    box-shadow: none;
+  }
 `;
 
 const Image = styled.img`
@@ -30,6 +39,7 @@ const Title = styled.p`
   font-size: 1.2rem;
   color: #41b883;
 `;
+
 class CoinGrid extends React.Component {
   convertToNumber(value) {
     let str = value.replace("$", "").trim();
@@ -37,7 +47,6 @@ class CoinGrid extends React.Component {
   }
 
   renderCoinsList() {
-    const BASE_URL = "https://www.cryptocompare.com";
     return this.props.coins
       .filter((coin) => {
         return coin.CoinInfo.FullName.toLowerCase().includes(
@@ -46,9 +55,9 @@ class CoinGrid extends React.Component {
       })
       .map((coin, index) => {
         return (
-          <Tile key={index}>
+          <Tile key={index} to={`/coindetail/${coin.CoinInfo.Name}`}>
             <Image
-              src={BASE_URL + coin.CoinInfo.ImageUrl}
+              src={`https://www.cryptocompare.com${coin.CoinInfo.ImageUrl}`}
               alt={coin.CoinInfo.Name}
             />
             <Title>{coin.CoinInfo.FullName}</Title>

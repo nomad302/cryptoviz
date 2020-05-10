@@ -4,6 +4,7 @@ import AppLayout from "./AppLayout";
 import NavBar from "./NavBar";
 import DashBoard from "./Dashboard";
 import News from "./News";
+import CoinDetails from "./CoinDetails";
 import history from "../history";
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={DashBoard} />
           <Route path="/news" exact component={News} />
+          <Route path="/coindetail:name" exact component={CoinDetails} />
         </Switch>
       </AppLayout>
     </Router>
