@@ -8,3 +8,8 @@ export const fetchCoins = () => async (dispatch) => {
 export const searchCoins = (term) => (dispatch) => {
   dispatch({ type: "SEARCH_COINS", payload: term });
 };
+
+export const fetchHistoricalData = (coin) => async (dispatch) => {
+  const response = await axios.get(`/historical/${coin}`);
+  dispatch({ type: "FETCH_HISTORICAL", payload: response.Data });
+};
