@@ -12,7 +12,6 @@ const client = redis.createClient({
 });
 
 const getAsync = promisify(client.get).bind(client);
-const setAsync = promisify(client.set).bind(client);
 
 app.get("/coins", async (req, res) => {
   const coins = await getAsync("allCoins");
@@ -21,23 +20,11 @@ app.get("/coins", async (req, res) => {
 });
 
 app.get("/historical/:coin", async (req, res) => {
-  const data = await getAsync(req.params.coin);
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
 
-  if (!data) {
-    const responseData = await axios.get(
-      `/data/v2/histoday?fsym=${req.params.coin}&tsym=USD&limit=10`
-    );
-    const success = await setAsync(
-      req.params.coin,
-      JSON.stringify(responseData)
-    );
-    console.log(success);
+  const histData = await getAsync(req.params.coin);
 
-    return res.send(responseData);
-  }
-
-  return res.send(JSON.parse(data));
+  return res.send(JSON.parse(histData));
 });
 
 app.listen(4000);

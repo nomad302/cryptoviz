@@ -4,15 +4,16 @@ import { fetchHistoricalData } from "../actions";
 
 class CoinDetails extends React.Component {
   componentDidMount() {
-    this.props.fetchHistoricalData(this.props.match.params.coin);
+    console.log(this.props);
+    this.props.fetchHistoricalData(this.props.match.params.name);
   }
 
   render() {
-    return <div>Coins Detais</div>;
+    return <div>coindetails : {this.props.coins.length}</div>;
   }
 }
-const mapStateToProps = (state, ownProps) => {
-  return { coin: state.coins[ownProps.match.params.coin] };
+const mapStateToProps = (state) => {
+  return { coins: state.coins };
 };
 
 export default connect(mapStateToProps, { fetchHistoricalData })(CoinDetails);
