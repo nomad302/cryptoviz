@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchHistoricalData, fetchCoins } from "../actions";
-import Chart from "./Chart";
+import { fetchCoins, fetchHistoricalData } from "../actions";
+import Chart from "./chart/Chart";
 
 const ChartGrid = styled.div`
   display: grid;
@@ -36,16 +36,16 @@ class CoinDetails extends React.Component {
           }`}
           alt={this.props.match.params.name}
         />
-        <Chart />
+        <Chart coin={this.props.match.params.name} />
       </ChartGrid>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { coins: state.coins, historical: state.historicalData.Data };
+  return { coins: state.coins };
 };
 
-export default connect(mapStateToProps, { fetchHistoricalData, fetchCoins })(
+export default connect(mapStateToProps, { fetchCoins, fetchHistoricalData })(
   CoinDetails
 );

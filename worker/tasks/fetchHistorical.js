@@ -19,7 +19,7 @@ module.exports = async function fetchHistorical() {
   coins.forEach(async (coin) => {
     try {
       const histData = await axios.get(
-        `/data/v2/histoday?fsym=${coin.CoinInfo.Name}&tsym=USD&limit=10`
+        `/data/v2/histoday?fsym=${coin.CoinInfo.Name}&tsym=USD&limit=200`
       );
       const success = await setAsync(
         coin.CoinInfo.Name,

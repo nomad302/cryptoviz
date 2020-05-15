@@ -11,5 +11,6 @@ export const searchCoins = (term) => (dispatch) => {
 
 export const fetchHistoricalData = (coin) => async (dispatch) => {
   const response = await axios.get(`/historical/${coin}`);
-  dispatch({ type: "FETCH_HISTORICAL", payload: response.data.Data });
+  const arr = response.data.Data.Data.map(({ time, close }) => [time, close]);
+  dispatch({ type: "FETCH_HISTORICAL", payload: arr });
 };
