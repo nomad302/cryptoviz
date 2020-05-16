@@ -12,6 +12,7 @@ const client = redis.createClient({
 });
 
 const getAsync = promisify(client.get).bind(client);
+const existAsync = promisify(client.exists).bind(client);
 
 app.get("/coins", async (req, res) => {
   const coins = await getAsync("allCoins");
@@ -25,6 +26,12 @@ app.get("/historical/:coin", async (req, res) => {
   const histData = await getAsync(req.params.coin);
 
   return res.send(JSON.parse(histData));
+});
+
+app.get("/news", async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  const newsData = await getAsync(`ALL_NEWS`);
+  return res.send(JSON.parse(newsData));
 });
 
 app.listen(4000);

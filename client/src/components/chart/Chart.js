@@ -19,11 +19,11 @@ class Chart extends React.Component {
   render() {
     let options = {
       title: {
-        text: `${this.props.coin} Price`,
+        text: `${this.props.coin.CoinInfo.FullName} Price`,
       },
       series: [
         {
-          name: this.props.coin,
+          name: this.props.coin.CoinInfo.Name,
           data: this.props.historical,
         },
       ],
@@ -33,13 +33,11 @@ class Chart extends React.Component {
       return null;
     }
     return (
-      <div>
-        <HighchartsReact
-          highcharts={Highcharts}
-          constructorType={"stockChart"}
-          options={options}
-        />
-      </div>
+      <HighchartsReact
+        highcharts={Highcharts}
+        constructorType={"stockChart"}
+        options={options}
+      />
     );
   }
 }
