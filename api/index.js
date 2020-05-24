@@ -12,7 +12,6 @@ const client = redis.createClient({
 });
 
 const getAsync = promisify(client.get).bind(client);
-const existAsync = promisify(client.exists).bind(client);
 
 app.get("/coins", async (req, res) => {
   const coins = await getAsync("allCoins");

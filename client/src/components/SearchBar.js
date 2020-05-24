@@ -17,7 +17,7 @@ const SearchBar = (props) => {
   return (
     <Input
       type="text"
-      placeholder="Search"
+      placeholder="Search Coins"
       value={props.searchValue}
       onChange={(e) => props.searchCoins(e.target.value)}
     />

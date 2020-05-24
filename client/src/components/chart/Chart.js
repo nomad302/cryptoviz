@@ -44,4 +44,4 @@ class Chart extends React.Component {
 const mapStateToProps = (state) => {
   return { historical: state.historicalData };
 };
-export default connect(mapStateToProps, {})(Chart);
+export default connect(mapStateToProps)(Chart);

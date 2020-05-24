@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchCoins, fetchHistoricalData, fetchCoinNews } from "../actions";
+import { fetchCoins, fetchHistoricalData } from "../actions";
 import Chart from "./chart/Chart";
 
 const ChartGrid = styled.div`
@@ -17,7 +17,7 @@ const SideGrid = styled.div`
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;
   grid-gap: 15px;
-  backgro;und: #1f1b24;
+  background: #1f1b24;
   color: #efbb35;
   margin: 0;
 `;
@@ -27,9 +27,11 @@ const Image = styled.img`
   width: 150px;
   margin: auto;
 `;
+
 const Price = styled.h1`
   margin: auto;
   font-size: 2rem;
+  color: ${(props) => (props.price < 0 ? "red" : "green")};
 `;
 const Title = styled.h1`
   margin: auto;
@@ -37,27 +39,33 @@ const Title = styled.h1`
 `;
 
 class CoinDetails extends React.Component {
-  componentDidMount() {
-    this.props.fetchHistoricalData(this.props.match.params.name);
-    this.props.fetchCoinNews();
+  convertToNumber(value) {
+    let str = value.replace("$", "").trim();
+    return Number(str);
   }
   getCurrentCoin() {
     return this.props.coins.find(
-      (coin) => coin.CoinInfo.Name === this.props.match.params.name
+      (coin) => coin.CoinInfo.Name === this.props.currentCoin
     );
   }
   render() {
     return (
       <ChartGrid>
         <SideGrid>
-          <Title>{this.getCurrentCoin().CoinInfo.FullName}</Title>
+          <Title>{this.getCurrentCoin().CoinInfo.Name}</Title>
           <Image
             src={`https://www.cryptocompare.com${
               this.getCurrentCoin().CoinInfo.ImageUrl
             }`}
-            alt={this.props.match.params.name}
+            alt={this.props.currentCoin}
           />
-          <Price>{this.getCurrentCoin().DISPLAY.USD.PRICE}</Price>
+          <Price
+            price={this.convertToNumber(
+              this.getCurrentCoin().DISPLAY.USD.CHANGE24HOUR
+            )}
+          >
+            {this.getCurrentCoin().DISPLAY.USD.PRICE}
+          </Price>
         </SideGrid>
 
         <Chart coin={this.getCurrentCoin()} />
@@ -67,11 +75,10 @@ class CoinDetails extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { coins: state.coins, news: state.coinNews };
+  return { coins: state.coins, currentCoin: state.currentCoin.value };
 };
 
 export default connect(mapStateToProps, {
   fetchCoins,
   fetchHistoricalData,
-  fetchCoinNews,
 })(CoinDetails);

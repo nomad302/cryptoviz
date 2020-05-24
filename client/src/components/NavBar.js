@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const Logo = styled.div`
   font-size: 1.5rem;
   color: #41b883;
+  font-weight: bold;
 `;
 const Bar = styled.div`
   display: grid;

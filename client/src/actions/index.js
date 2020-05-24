@@ -22,3 +22,8 @@ export const fetchCoinNews = () => async (dispatch) => {
   const response = await axios.get(`/news`);
   dispatch({ type: "FETCH_COIN_NEWS", payload: response.data });
 };
+
+export const setCurrentCoin = (coin) => async (dispatch) => {
+  dispatch({ type: "SET_COIN", payload: coin });
+  dispatch(fetchHistoricalData(coin));
+};

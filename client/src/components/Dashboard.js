@@ -13,6 +13,12 @@ const Board = styled.div`
   height: 80vh;
 `;
 
+const SearchFlex = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 class DashBoard extends React.Component {
   componentDidMount() {
     this.props.fetchCoins();
@@ -34,10 +40,13 @@ class DashBoard extends React.Component {
     }
     return (
       <div>
-        <SearchBar
-          value={this.props.searchTerm.value}
-          onSearch={this.onSeachChange}
-        />
+        <SearchFlex>
+          <SearchBar
+            value={this.props.searchTerm}
+            onSearch={this.onSeachChange}
+          />
+        </SearchFlex>
+
         <CoinGrid />
       </div>
     );
@@ -47,7 +56,7 @@ class DashBoard extends React.Component {
 const mapStateToProps = (state) => {
   return {
     coins: state.coins,
-    searchTerm: state.searchTerm,
+    searchTerm: state.searchTerm.value,
   };
 };
 
