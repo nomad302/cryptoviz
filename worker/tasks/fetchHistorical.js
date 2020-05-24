@@ -1,4 +1,4 @@
-var axios = require("../../apiconf/crypto");
+var axios = require("../apiconf/crypto");
 const redis = require("redis");
 const { promisify } = require("util");
 

@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const redis = require("redis");
 const { promisify } = require("util");
-const axios = require("../apiconf/crypto");
+
+// start worker
+require("./worker")();
 
 // redis client configuration
 const client = redis.createClient({
@@ -33,4 +35,5 @@ app.get("/news", async (req, res) => {
   return res.send(JSON.parse(newsData));
 });
 
-app.listen(4000);
+const PORT = process.env.PORT || 4000;
+app.listen(PORT);
