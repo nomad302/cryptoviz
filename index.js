@@ -7,11 +7,13 @@ const { promisify } = require("util");
 require("./worker")();
 
 // redis client configuration
-const client = redis.createClient({
-  host: "127.0.0.1",
-  no_ready_check: true,
-  auth_pass: "root123",
-});
+const client =
+  redis.createClient(process.env.REDIS_URL) ||
+  redis.createClient({
+    host: "127.0.0.1",
+    no_ready_check: true,
+    auth_pass: "root123",
+  });
 
 const getAsync = promisify(client.get).bind(client);
 
