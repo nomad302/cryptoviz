@@ -4,7 +4,7 @@ const redis = require("redis");
 const { promisify } = require("util");
 
 // start worker
-require("./worker")();
+//require("./worker")();
 
 // redis client configuration
 let client = null;
