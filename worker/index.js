@@ -13,7 +13,7 @@ module.exports = () => {
   );
 
   var fetchHistoricalJob = new CronJob(
-    "0 0 */6 * * *",
+    "0 2 */6 * * *",
     fetchHistorical,
     null,
     true,
@@ -21,7 +21,7 @@ module.exports = () => {
   );
 
   var fetchCoinNewsJob = new CronJob(
-    "0 0 */6 * * *",
+    "0 4 */6 * * *",
     fetchCoinNews,
     null,
     true,
