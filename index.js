@@ -4,11 +4,11 @@ const redis = require("redis");
 const { promisify } = require("util");
 
 // start worker
-require("./worker")();
+//require("./worker")();
 
 // redis client configuration
 const client =
-  redis.createClient(process.env.REDIS_URL) ||
+  // redis.createClient(process.env.REDIS_URL) ||
   redis.createClient({
     host: "127.0.0.1",
     no_ready_check: true,

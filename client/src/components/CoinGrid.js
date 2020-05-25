@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 15px;
   color: #efbb35;
   margin-top: 20px;
@@ -32,12 +32,13 @@ const Image = styled.img`
 `;
 
 const Price = styled.strong`
-  color: ${(props) => (props.price < 0 ? "red" : "green")};
+  color: ${(props) => (props.price < 0 ? "#ff2d15" : "#2f9821")};
 `;
 
 const Title = styled.p`
   font-size: 1.2rem;
   color: #41b883;
+  font-weight: bold;
 `;
 
 class CoinGrid extends React.Component {

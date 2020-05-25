@@ -31,7 +31,7 @@ const Image = styled.img`
 const Price = styled.h1`
   margin: auto;
   font-size: 2rem;
-  color: ${(props) => (props.price < 0 ? "red" : "green")};
+  color: ${(props) => (props.price < 0 ? "#ff2d15" : "#2f9821")};
 `;
 const Title = styled.h1`
   margin: auto;

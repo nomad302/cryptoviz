@@ -5,7 +5,6 @@ import { setCurrentCoin } from "../actions";
 
 const TopCoinsFlex = styled.div`
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-top: 15px;
@@ -16,12 +15,12 @@ const Tile = styled.div`
   color: #efbb35;
   text-align: center;
   padding: 15px;
-  width: 100px;
   cursor: pointer;
+  width: 120px;
 `;
 
 const Price = styled.h3`
-  color: ${(props) => (props.price < 0 ? "red" : "green")};
+  color: ${(props) => (props.price < 0 ? "#ff2d15" : "#2f9821")};
 `;
 
 class TopCoins extends React.Component {
@@ -56,7 +55,7 @@ class TopCoins extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    topCoins: state.coins.slice(0, 9),
+    topCoins: state.coins.slice(0, 8),
     currentCoin: state.currentCoin.value,
   };
 };

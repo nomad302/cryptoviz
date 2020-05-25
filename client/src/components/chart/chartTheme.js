@@ -22,7 +22,7 @@ export default () => {
     },
     title: {
       style: {
-        color: "#41B883",
+        color: "#EFBB35",
         textTransform: "uppercase",
         fontSize: "20px",
       },
