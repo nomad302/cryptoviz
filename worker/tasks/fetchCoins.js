@@ -3,12 +3,17 @@ const redis = require("redis");
 const { promisify } = require("util");
 
 // redis client configuration
-const client = redis.createClient({
-  host: "127.0.0.1",
-  no_ready_check: true,
-  auth_pass: "root123",
-});
-
+let client = null;
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === "development") {
+  client = redis.createClient({
+    host: "127.0.0.1",
+    no_ready_check: true,
+    auth_pass: "root123",
+  });
+} else {
+  client = redis.createClient(process.env.REDIS_URL);
+}
 const setAsync = promisify(client.set).bind(client);
 
 module.exports = async function fetchCoins() {
