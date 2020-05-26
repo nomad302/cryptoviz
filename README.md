@@ -1,4 +1,4 @@
-# Crptoviz
+# Cryptoviz
 
 cryptocurrency dashboard of top 100 coins according to market cap.
 
