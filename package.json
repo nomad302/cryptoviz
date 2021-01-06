@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/nomad302/cryptoviz#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "concurrently": "^5.2.0",
     "cron": "^1.8.2",
     "express": "^4.17.1",
